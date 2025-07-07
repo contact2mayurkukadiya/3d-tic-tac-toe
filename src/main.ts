@@ -1,7 +1,8 @@
-import { platformBrowser } from '@angular/platform-browser';
-import { AppModule } from './app/app.module';
+import { bootstrapApplication, platformBrowser } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { provideAnimations } from '@angular/platform-browser/animations'; // <-- THIS IMPORT IS CRUCIAL
 
-platformBrowser().bootstrapModule(AppModule, {
-  ngZoneEventCoalescing: true,
+bootstrapApplication(AppComponent, {
+  providers: [provideAnimations()]
 })
-  .catch(err => console.error(err));
+  .catch((err) => console.error(err));

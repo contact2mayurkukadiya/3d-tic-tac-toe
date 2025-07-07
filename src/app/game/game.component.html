@@ -1,0 +1,64 @@
+<div class="game-container">
+    <span class="loader" *ngIf="loading"></span>
+    <canvas #rendererCanvas class="three-canvas" [ngClass]="{'hidden': loading}"></canvas>
+    <div [hidden]="loading" class="game-ui" [ngClass]="{'hidden': loading}">
+        <h1 *ngIf="!isGameStarted && !winner && !isDraw" class="game-title">3D Tic-Tac-Toe</h1>
+
+        <div class="game-status">
+            <div *ngIf="isGameStarted && !winner && !isDraw" style="margin-bottom: 16px;">
+                Current Player: <span
+                    [ngClass]="{'player-x': currentPlayer === 'X', 'player-o': currentPlayer === 'O'}">{{
+                    currentPlayer
+                    }}</span>
+            </div>
+
+            <div *ngIf="winner" class="message winner">
+                Player <span [ngClass]="{'player-x': winner === 'X', 'player-o': winner === 'O'}">{{ winner
+                    }}</span>
+                wins!
+            </div>
+            <div *ngIf="isDraw" class="message draw">
+                It's a Draw!
+            </div>
+
+            <button class="action-button" (mouseenter)="playHoverSound()" (click)="resetGame()">
+                {{ (winner || isDraw) ? 'Play Again' : (isGameStarted ? 'Reset Game' : 'Start New Game') }}
+            </button>
+
+            <audio #hoverSound src="audio/button-hover.wav" preload="auto"></audio>
+            <audio #clickSound src="audio/button-click.mp3" preload="auto"></audio>
+            <audio #winSound src="audio/game-win.wav" preload="auto"></audio>
+            <audio #drawSound src="audio/game-draw.mp3" preload="auto"></audio>
+        </div>
+
+        <div class="action-panel">
+            <button class="action-button icon-button" (mouseenter)="playHoverSound()"
+                (click)="playClickSound();openSettingMenu()">
+                <img src="icon/setting.svg" alt="Setting Icon" class="action-icon">
+            </button>
+
+        </div>
+    </div>
+</div>
+<audio #bgSound src="audio/game-bg.mp3" loop preload="auto"></audio>
+
+
+
+<app-setting #projectDetailsDialogRef [title]="'Settings'" [closeButtonText]="'Close'"
+    [initialMusicToggleState]="isMusicEnabled" [initialSoundEffectsToggleState]="isSoundEffectsEnabled"
+    (musicToggleChange)="toggleBackgroundMusic($event)" (soundEffectsToggleChange)="toggleSoundEffects($event)"
+    (closeDialog)="playClickSound()" class="setting-dialog" [ngClass]="{'hidden': !projectDetailsDialogRef.isOpen}">
+    <p>This is a 3D Tic-Tac-Toe game built with Angular and Three.js.</p>
+    <p>
+        Objective: Be the first player to get three of your marks in a row, column, or diagonal across the 3x3x3 grid.
+    </p>
+
+    Controls:
+    <ul>
+        <li>Click on an empty sphere to place your marker.</li>
+        <li>Drag to rotate the board.</li>
+        <li>Scroll to zoom in/out.</li>
+    </ul>
+
+    <p>Have fun!</p>
+</app-setting>

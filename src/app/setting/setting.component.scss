@@ -1,0 +1,191 @@
+:host {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.dialog-container {
+    position: relative;
+    z-index: 1001;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(30px);
+    color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-header {
+    padding: 16px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+        margin: 0;
+        font-size: 1.5em;
+        font-family: 'JellyBounce', 'Arial', sans-serif;
+    }
+}
+
+.dialog-close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8em;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+        color: #ff6b6b;
+    }
+}
+
+.dialog-content {
+    padding: 20px;
+    flex-grow: 1;
+    color: #333;
+    font-size: 1.1em;
+    line-height: 1.6;
+
+    p {
+        margin-bottom: 10px;
+    }
+}
+
+.dialog-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+    text-align: right;
+}
+
+.dialog-button {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+
+    &:hover {
+        background-color: #e65a5a;
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+/* --- New Styles for Settings Toggles --- */
+.section-divider {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    margin: 0px 0px;
+}
+
+h3 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #3b82f6;
+    font-size: 1.3em;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 5px 0;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+    /* Rounded corners for the track */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+    /* Make the thumb round */
+}
+
+input:checked+.slider {
+    background-color: #3b82f6;
+    /* Blue when checked */
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #3b82f6;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}

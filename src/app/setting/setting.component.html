@@ -1,0 +1,31 @@
+<div class="dialog-overlay" *ngIf="isOpen" [@fadeOverlay]="isOpen ? 'open' : 'closed'" (click)="close()">
+</div>
+
+<div class="dialog-container" *ngIf="isOpen" [@zoomDialog]="isOpen ? 'open' : 'closed'">
+    <div class="dialog-header">
+        <h2>{{ title }}</h2>
+        <button class="action-button icon-button" (click)="close()">
+            <img src="icon/close.svg" alt="Close" class="action-icon small-icon">
+        </button>
+    </div>
+    <hr class="section-divider">
+    <div class="dialog-content">
+        <div class="flex items-center justify-between mb-4">
+            <span class="text-white text-base tracking-wide">Sounds</span>
+            <div class="flex gap-2">
+                <button class="action-button icon-button" (click)="onMusicToggleChange()">
+                    <img *ngIf="musicEnabled" src="icon/music-on.svg" alt="Music On" class="action-icon">
+                    <img *ngIf="!musicEnabled" src="icon/music-off.svg" alt="Music Off" class="action-icon">
+                </button>
+                <button class="action-button icon-button" (click)="onSoundEffectsToggleChange()">
+                    <img *ngIf="soundEffectsEnabled" src="icon/volume-on.svg" alt="Sound On" class="action-icon">
+                    <img *ngIf="!soundEffectsEnabled" src="icon/volume-off.svg" alt="Sound Off" class="action-icon">
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="dialog-footer">
+        <button class="dialog-button" (click)="close()">{{ closeButtonText }}</button>
+    </div>
+</div>

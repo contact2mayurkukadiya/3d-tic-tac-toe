@@ -1,0 +1,181 @@
+:host {
+    display: block; // Host element takes up space
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; // Prevent scrollbars
+    position: relative; // For positioning child elements
+    font-family: 'JellyBounce', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.game-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+}
+
+.three-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.game-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; // Align content to the top
+    align-items: center;
+    pointer-events: none; // Allows clicks to pass through to the canvas
+    color: #ffffff; // White text for readability over colorful background
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5); // Subtle text shadow for contrast
+    user-select: none; // Prevent text selection
+}
+
+.game-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #e0f2f7; // Lighter shade
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+        1px 6px 1px #919191,
+        1px 7px 1px #919191,
+        1px 8px 1px #919191,
+        1px 9px 1px #919191,
+        1px 10px 1px #919191,
+        1px 18px 6px rgba(16, 16, 16, 0.4),
+        1px 22px 10px rgba(16, 16, 16, 0.2),
+        1px 25px 35px rgba(16, 16, 16, 0.2),
+        1px 30px 60px rgba(16, 16, 16, 0.4);
+}
+
+.game-status {
+    color: #fff;
+    margin: 10px auto;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 16px;
+    backdrop-filter: blur(10px);
+}
+
+.player-x {
+    color: #ff6b6b; // Red for X
+    font-weight: bold;
+}
+
+.player-o {
+    color: #3B82F6; // Blue for O
+    font-weight: bold;
+}
+
+.message {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.message.winner {
+    color: #72ef7d; // Green for winner
+}
+
+.message.draw {
+    color: #f7e072; // Yellow for draw
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 2em;
+    }
+
+    .game-status {
+        font-size: 1.2em;
+        padding: 10px 20px;
+    }
+
+    .message {
+        font-size: 1.5em;
+    }
+
+    .reset-button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: absolute;
+    animation: rotate 1s linear infinite
+}
+
+.loader::before,
+.loader::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid #FFF;
+    animation: prixClipFix 2s linear infinite;
+}
+
+.loader::after {
+    inset: 8px;
+    transform: rotate3d(90, 90, 0, 180deg);
+    border-color: #FF3D00;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes prixClipFix {
+    0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
+    }
+
+    50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
+    }
+
+    75%,
+    100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+    }
+}
+
+.action-panel {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}

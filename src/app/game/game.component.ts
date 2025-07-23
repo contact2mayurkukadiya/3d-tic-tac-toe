@@ -319,6 +319,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
 
   private resetGameInternal(): void {
+    this.toggleBackgroundMusic(this.isMusicEnabled);
     // Initialize the 3D board array with nulls
     this.board = [];
     for (let i = 0; i < this.gridSize; i++) {

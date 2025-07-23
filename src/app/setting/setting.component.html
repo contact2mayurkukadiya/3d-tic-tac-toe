@@ -24,6 +24,71 @@
             </div>
         </div>
 
+
+        <div class="bg-gray-800 text-white p-6 rounded-lg shadow-xl border border-gray-600 max-w-md mx-auto font-sans">
+
+            <!-- Title -->
+            <h2 class="text-2xl font-bold text-center mb-4">
+                How to Play
+            </h2>
+
+            <!-- Goal -->
+            <p class="text-sm text-center text-gray-300 mb-5">
+                Be the first to get **three marks in a row** — horizontally, vertically, or diagonally.
+            </p>
+
+            <!-- Controls Section -->
+            <div class="mb-5">
+                <h3 class="text-lg font-semibold text-teal-300 mb-2">
+                    Controls
+                </h3>
+                <ul class="list-none space-y-2 text-gray-200 text-sm">
+                    <li class="flex items-center">
+                        <span class="text-teal-400 mr-2">●</span>
+                        <div><strong class="font-medium text-white">Rotate:</strong> Click & Drag Mouse</div>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-teal-400 mr-2">●</span>
+                        <div><strong class="font-medium text-white">Zoom:</strong> Scroll Mouse Wheel</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Gameplay Section -->
+            <div>
+                <h3 class="text-lg font-semibold text-pink-300 mb-2">
+                    Gameplay
+                </h3>
+                <ul class="list-none space-y-2 text-gray-200 text-sm">
+                    <li class="flex items-center">
+                        <span class="text-pink-400 mr-2">1.</span>
+                        <div>Click <strong class="font-medium text-white">Start New Game</strong> to begin.</div>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-pink-400 mr-2">2.</span>
+                        <div>Click any <strong class="font-medium text-white">empty sphere</strong> to place your mark.
+                        </div>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-pink-400 mr-2">3.</span>
+                        <div>The first player to <strong class="font-medium text-white">align three marks</strong> wins!
+                        </div>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-pink-400 mr-2">4.</span>
+                        <div>If all spheres are filled with no winner, the game is a <strong
+                                class="font-medium text-white">Draw</strong>.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Pro-Tip Section -->
+            <div class="mt-5 pt-4 border-t border-gray-700">
+                <p class="text-center text-amber-300 text-xs bg-gray-900/50 p-3 rounded-md">
+                    <strong>Pro-Tip:</strong> Always rotate the board to see all angles!
+                </p>
+            </div>
+        </div>
     </div>
     <div class="dialog-footer">
         <button class="dialog-button" (click)="close()">{{ closeButtonText }}</button>

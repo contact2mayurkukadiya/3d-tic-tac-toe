@@ -420,6 +420,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
 
   private placeMarker(position: THREE.Vector3): void {
+    this.playClickSound();
     let marker: THREE.Object3D;
     const markerScale = this.cellSize * 0.4;
 

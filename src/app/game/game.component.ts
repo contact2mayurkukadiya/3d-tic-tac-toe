@@ -4,8 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CommonModule } from '@angular/common'; // Required for ngIf etc.
 import { UltraHDRLoader } from 'three/addons/loaders/UltraHDRLoader.js';
 import { SettingComponent } from '../setting/setting.component';
-import { winLineFragmentShader, winLineVertexShader } from '../shared/win-line.shader';
-// Define types for game state for better type safety
+
 type Player = 'X' | 'O';
 type Cell = Player | null;
 
@@ -86,7 +85,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   onHostWindowResize() {
-    this.onWindowResize();
+    setTimeout(() => {
+      this.onWindowResize();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -540,44 +541,22 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     const geometry = new THREE.TubeGeometry(path, tubularSegments, radius, radialSegments, closed);
 
     // Use a MeshStandardMaterial or MeshPhysicalMaterial for better lighting and reflections
-    // const material = new THREE.MeshPhysicalMaterial({
-    //   color: color,
-    //   transparent: false,
-    //   opacity: 0.2,
-    //   transmission: 1,
-    //   roughness: 0,
-    //   metalness: 0.0,
-    //   clearcoat: 1.0,
-    //   clearcoatRoughness: 0.05,
-    //   ior: 1.31,
-    //   sheen: 0.0,
-    //   reflectivity: 0.5,
-    //   specularIntensity: 1.0,
-    //   specularColor: new THREE.Color(0xFFFFFF),
-    //   thickness: 2,
-    //   envMap: this.scene.environment
-    // });
-
-    const material = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 },
-        bulgePosition: { value: 0.0 },
-        bulgeSize: { value: 0.1 },
-        bulgeAmplitude: { value: 0.3 },
-
-        color: { value: new THREE.Color(color) },
-        envMap: { value: this.scene.environment },
-        opacity: { value: 0.7 },
-        ior: { value: 1.31 },
-        reflectivity: { value: 0.5 }
-      },
-      vertexShader: winLineVertexShader,
-      fragmentShader: winLineFragmentShader,
-      transparent: true,
-      // You might need these for correct blending with background
-      blending: THREE.AdditiveBlending, // Or THREE.NormalBlending, experiment
-      depthWrite: false, // For transparency issues
-      side: THREE.DoubleSide
+    const material = new THREE.MeshPhysicalMaterial({
+      color: color,
+      transparent: false,
+      opacity: 0.2,
+      transmission: 1,
+      roughness: 0,
+      metalness: 0.0,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.05,
+      ior: 1.31,
+      sheen: 0.0,
+      reflectivity: 0.5,
+      specularIntensity: 1.0,
+      specularColor: new THREE.Color(0xFFFFFF),
+      thickness: 2,
+      envMap: this.scene.environment
     });
 
     this.winLineMesh = new THREE.Mesh(geometry, material);
@@ -611,20 +590,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
           this.markerGroup.children.forEach(marker => {
             marker.rotation.y += 0.05;
           });
-
-          if (this.winLineMesh) {
-            const material = this.winLineMesh.material as THREE.ShaderMaterial;
-            const elapsedTime = this.clock.getElapsedTime();
-            material.uniforms['time'].value = elapsedTime;
-            const bulgeSpeed = 0.5;
-            material.uniforms['bulgePosition'].value = (elapsedTime * bulgeSpeed) % 1.0;
-            // material.uniforms['opacity'].value = 0.7 + Math.sin(elapsedTime * 5) * 0.2;
-            // Pulsating opacity
-            // material.opacity = 0.7 + Math.sin(time * 5) * 0.2; // Adjust base opacity and amplitude
-            // Pulsating emissive intensity for glowing effect
-            // material.emissiveIntensity = 0.5 + Math.sin(time * 5) * 0.2; // Adjust base and amplitude
-          }
-
 
           const elapsedTime = this.clock.getElapsedTime() * 1000; // in milliseconds
 
